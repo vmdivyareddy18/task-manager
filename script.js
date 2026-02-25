@@ -87,14 +87,4 @@ function loadTasks() {
         });
 }
 
-function deleteTask(i) {
-
-    tasks.splice(i, 1);
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    loadTasks();
-}
-
-// AUTO LOAD
-if (document.getElementById("taskList")) {
-    loadTasks();
-}
+func
