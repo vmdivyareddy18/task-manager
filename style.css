@@ -6,16 +6,16 @@
 }
 
 body {
-    background: #f11212;
+    background: #080808;
     display: flex;
     justify-content: center;
     padding: 30px;
 }
 
 .app {
-    width: 600px;
-    background: white;
-    border-radius: 12px;
+    width: 1100px;
+    background: rgb(246, 158, 158);
+    border-radius: 13px;
     padding: 25px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
@@ -32,7 +32,7 @@ header h1 {
 }
 
 header p {
-    color: #7f8c8d;
+    color: #0a0109;
 }
 
 /* Filters */
