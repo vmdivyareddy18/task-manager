@@ -1,22 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Login | Task Manager</title>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="auth-box">
-        <h2>Login</h2>
+    <div class="app">
 
-        <input id="loginEmail" placeholder="Email">
-        <input id="loginPass" type="password" placeholder="Password">
+        <header>
+            <h1>📋 Task Manager</h1>
+            <p>Organize. Prioritize. Execute.</p>
+        </header>
 
-        <button onclick="login()">Login</button>
+        <!-- Filters -->
+        <div class="filters">
+            <button class="active" onclick="filterTasks('all')">All (<span id="allCount">0</span>)</button>
+            <button onclick="filterTasks('todo')">Todo (<span id="todoCount">0</span>)</button>
+            <button onclick="filterTasks('progress')">In Progress (<span id="progressCount">0</span>)</button>
+            <button onclick="filterTasks('done')">Done (<span id="doneCount">0</span>)</button>
+        </div>
 
-        <p>New user? <a href="register.html">Register</a></p>
+        <!-- Add Task -->
+        <div class="add-box">
+            <input id="title" placeholder="Task title">
+            <select id="priority">
+                <option>Low</option>
+                <option>Medium</option>
+                <option>High</option>
+            </select>
+            <button onclick="addTask()">+ New Task</button>
+        </div>
+
+        <!-- Tasks -->
+        <div id="taskList" class="task-list"></div>
+
+        <p class="empty" id="emptyMsg">No tasks yet. Create one above.</p>
+
+        <footer>Task Manager — Frontend Project</footer>
+
     </div>
 
     <script src="script.js"></script>
