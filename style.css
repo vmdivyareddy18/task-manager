@@ -12,13 +12,23 @@ body {
     padding: 30px;
 }
 
-.app {
+.container {
     width: 1100px;
-    background: rgb(246, 158, 158);
-    border-radius: 13px;
+    min-height: 70vh;
+    /* ✅ Background Image */
+    background:
+        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+        url("bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-radius: 12px;
     padding: 25px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
+
 
 /* Header */
 
