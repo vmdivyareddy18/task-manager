@@ -1,90 +1,107 @@
-// USERS
-let users = JSON.parse(localStorage.getItem("users")) || [];
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let currentFilter = "all";
 
-// REGISTER
-function register() {
-
-    let name = regName.value;
-    let email = regEmail.value;
-    let pass = regPass.value;
-
-    if (!name || !email || !pass) {
-        alert("Fill all fields");
-        return;
-    }
-
-    users.push({ name, email, pass });
-    localStorage.setItem("users", JSON.stringify(users));
-
-    alert("Registered Successfully");
-    location = "index.html";
+function save() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    render();
 }
 
-// LOGIN
-function login() {
-
-    let email = loginEmail.value;
-    let pass = loginPass.value;
-
-    let user = users.find(u => u.email === email && u.pass === pass);
-
-    if (!user) {
-        alert("Invalid Login");
-        return;
-    }
-
-    localStorage.setItem("currentUser", email);
-    location = "dashboard.html";
-}
-
-// LOGOUT
-function logout() {
-    localStorage.removeItem("currentUser");
-    location = "index.html";
-}
-
-// TASKS
 function addTask() {
 
-    let text = taskInput.value.trim();
+    let title = document.getElementById("title").value.trim();
+    let priority = document.getElementById("priority").value;
 
-    if (text === "") {
-        alert("Enter task");
+    if (title === "") {
+        alert("Enter task title");
         return;
     }
 
-    let user = localStorage.getItem("currentUser");
+    tasks.push({
+        title,
+        priority,
+        status: "todo"
+    });
 
-    tasks.push({ user, text });
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    document.getElementById("title").value = "";
 
-    taskInput.value = "";
-    loadTasks();
+    save();
 }
 
-function loadTasks() {
+function changeStatus(i) {
 
-    let user = localStorage.getItem("currentUser");
+    let s = tasks[i].status;
 
-    if (!user) return;
+    if (s === "todo") tasks[i].status = "progress";
+    else if (s === "progress") tasks[i].status = "done";
+    else tasks[i].status = "todo";
+
+    save();
+}
+
+function deleteTask(i) {
+    tasks.splice(i, 1);
+    save();
+}
+
+function filterTasks(type) {
+
+    currentFilter = type;
+
+    document
+        .querySelectorAll(".filters button")
+        .forEach(b => b.classList.remove("active"));
+
+    event.target.classList.add("active");
+
+    render();
+}
+
+function render() {
 
     let list = document.getElementById("taskList");
     list.innerHTML = "";
 
-    tasks
-        .filter(t => t.user === user)
-        .forEach((t, i) => {
+    let all = 0, todo = 0, prog = 0, done = 0;
 
-            let li = document.createElement("li");
+    tasks.forEach((t, i) => {
 
-            li.innerHTML = `
-   ${t.text}
-   <span onclick="deleteTask(${i})">❌</span>
+        all++;
+
+        if (t.status === "todo") todo++;
+        if (t.status === "progress") prog++;
+        if (t.status === "done") done++;
+
+        if (currentFilter !== "all" && t.status !== currentFilter)
+            return;
+
+        let div = document.createElement("div");
+        div.className = "task";
+
+        div.innerHTML = `
+   <div>
+    <h4>${t.title}</h4>
+    <small class="${t.priority.toLowerCase()}">
+     ${t.priority} Priority | ${t.status}
+    </small>
+   </div>
+
+   <div class="actions">
+    <button onclick="changeStatus(${i})">🔄</button>
+    <button onclick="deleteTask(${i})">🗑</button>
+   </div>
   `;
 
-            list.appendChild(li);
-        });
+        list.appendChild(div);
+
+    });
+
+    document.getElementById("allCount").innerText = all;
+    document.getElementById("todoCount").innerText = todo;
+    document.getElementById("progressCount").innerText = prog;
+    document.getElementById("doneCount").innerText = done;
+
+    document.getElementById("emptyMsg").style.display =
+        list.innerHTML === "" ? "block" : "none";
 }
 
-func
+render();
