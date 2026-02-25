@@ -12,12 +12,13 @@ body {
     padding: 30px;
 }
 
-.container {
+
+.app {
     width: 1100px;
-    min-height: 70vh;
-    /* ✅ Background Image */
+    min-height: 90vh;
+    /* ✅ ADD THIS */
     background:
-        linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+        linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)),
         url("bg.jpg");
 
     background-size: cover;
@@ -30,6 +31,7 @@ body {
 }
 
 
+
 /* Header */
 
 header {
@@ -38,11 +40,11 @@ header {
 }
 
 header h1 {
-    color: #2c3e50;
+    color: #040609;
 }
 
 header p {
-    color: #0a0109;
+    color: #0e020d;
 }
 
 /* Filters */

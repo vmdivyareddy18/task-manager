@@ -105,3 +105,11 @@ function render() {
 }
 
 render();
+.app{
+    width: 600px;
+    min - height: 70vh;   /* ✅ ADD THIS */
+    background: white;
+    border - radius: 12px;
+    padding: 25px;
+    box - shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
